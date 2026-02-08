@@ -15,16 +15,27 @@
 // ============================================================================
 
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <strings.h>
 // --- Constantes Globais ---
 // Definem valores fixos para o número de territórios, missões e tamanho máximo de strings, facilitando a manutenção.
-
+#define MAX_TERRITÓRIOS 5
+#define TAM_STRING 100
 // --- Estrutura de Dados ---
 // Define a estrutura para um território, contendo seu nome, a cor do exército que o domina e o número de tropas.
-
+struct Território {
+    char nome[TAM_STRING];
+    char cor[TAM_STRING];
+    int tropas;
+};
 // --- Protótipos das Funções ---
 // Declarações antecipadas de todas as funções que serão usadas no programa, organizadas por categoria.
 // Funções de setup e gerenciamento de memória:
+void LimparBufferEntrada() {
+    int c;
+    while ((c = getchar())!= '\n' && c != EOF);
+}
 // Funções de interface com o usuário:
 // Funções de lógica principal do jogo:
 // Função utilitária:
@@ -32,6 +43,41 @@
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
 int main() {
+    struct Território territorios[MAX_TERRITÓRIOS];
+    int numterritorios = 0;
+
+    printf("============================================\n");
+    printf("        --- CADASTRO DE TERRITÓRIOS ---         \n");
+    printf("============================================\n");
+    if(numterritorios < MAX_TERRITÓRIOS){
+        do
+        {
+            printf("Escreva o Nome do território: ");
+            fgets(territorios[numterritorios].nome, TAM_STRING, stdin);
+            
+            printf("Escreva a cor das suas tropas(ex: azul, vermelho): ");
+            fgets(territorios[numterritorios].cor, TAM_STRING, stdin);
+
+            territorios[numterritorios].nome[strcspn(territorios[numterritorios].nome, "\n")] = '\0';
+            territorios[numterritorios].cor[strcspn(territorios[numterritorios].cor, "\n")] = '\0';
+            
+
+            printf("Escreva o número de suas tropas: ");
+            scanf("%d", territorios[numterritorios].tropas);
+            LimparBufferEntrada();
+            
+            numterritorios ++;
+        } while (numterritorios != 0);
+    }
+
+        for (int i = 0; i < numterritorios; i++){
+            printf("            ---EXIBIÇÃO DO MAPA---          \n");
+            printf("Território %d", i + 1);
+            printf("Nome: %s", territorios[i].nome);
+            printf("Cor: %s", territorios[i].cor);
+            printf("Tropas: %d", territorios[i].tropas);
+        }
+            printf("---------------------------------------------\n");
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
