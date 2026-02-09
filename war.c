@@ -49,35 +49,36 @@ int main() {
     printf("============================================\n");
     printf("        --- CADASTRO DE TERRITÓRIOS ---         \n");
     printf("============================================\n");
-    if(numterritorios < MAX_TERRITÓRIOS){
-        do
-        {
-            printf("Escreva o Nome do território: ");
-            fgets(territorios[numterritorios].nome, TAM_STRING, stdin);
-            
-            printf("Escreva a cor das suas tropas(ex: azul, vermelho): ");
-            fgets(territorios[numterritorios].cor, TAM_STRING, stdin);
+    
+    for (numterritorios = 0; numterritorios < MAX_TERRITÓRIOS; numterritorios++){
+        printf("Território %d de %d \n", numterritorios + 1, MAX_TERRITÓRIOS);
 
-            territorios[numterritorios].nome[strcspn(territorios[numterritorios].nome, "\n")] = '\0';
-            territorios[numterritorios].cor[strcspn(territorios[numterritorios].cor, "\n")] = '\0';
+        printf("Escreva o Nome do território: ");
+        fgets(territorios[numterritorios].nome, TAM_STRING, stdin);
+            
+        printf("Escreva a cor das suas tropas(ex: azul, vermelho): ");
+        fgets(territorios[numterritorios].cor, TAM_STRING, stdin);
+
+        territorios[numterritorios].nome[strcspn(territorios[numterritorios].nome, "\n")] = '\0';
+        territorios[numterritorios].cor[strcspn(territorios[numterritorios].cor, "\n")] = '\0';
             
 
-            printf("Escreva o número de suas tropas: ");
-            scanf("%d", territorios[numterritorios].tropas);
-            LimparBufferEntrada();
-            
-            numterritorios ++;
-        } while (numterritorios != 0);
-    }
-
+        printf("Escreva o número de suas tropas: ");
+        scanf("%d", &territorios[numterritorios].tropas);
+        LimparBufferEntrada();
+        printf("\n");
+    }    
+    
+    printf("\n");
+    printf("                  ---EXIBIÇÃO DO MAPA---                  \n");
         for (int i = 0; i < numterritorios; i++){
-            printf("            ---EXIBIÇÃO DO MAPA---          \n");
+            
             printf("Território %d", i + 1);
-            printf("Nome: %s", territorios[i].nome);
-            printf("Cor: %s", territorios[i].cor);
-            printf("Tropas: %d", territorios[i].tropas);
+            printf("\tNome: %s\t", territorios[i].nome);
+            printf("\tCor: %s\t", territorios[i].cor);
+            printf("\tTropas: %d\t\n", territorios[i].tropas);
         }
-            printf("---------------------------------------------\n");
+            printf("------------------------------------------------------------------\n");
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
