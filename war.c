@@ -220,6 +220,8 @@ int main() {
         switch(opcao) {
             case 1:
                 exibirMapa(mapa, numTerritorios);
+                printf("Pressione ENTER para continuar...\n");
+                getchar();
                 break;
                 
             case 2: {
